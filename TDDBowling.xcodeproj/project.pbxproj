@@ -16,6 +16,7 @@
 		361DBD7F2557920900A2B50F /* BowlingGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD7E2557920900A2B50F /* BowlingGameTests.swift */; };
 		361DBD842557930700A2B50F /* BowlingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD832557930700A2B50F /* BowlingGame.swift */; };
 		369C44F92557F9C100E07A7C /* BowlingGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369C44F82557F9C100E07A7C /* BowlingGameView.swift */; };
+		369C4516255806B000E07A7C /* BowlingGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369C4515255806B000E07A7C /* BowlingGameViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		361DBD7E2557920900A2B50F /* BowlingGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameTests.swift; sourceTree = "<group>"; };
 		361DBD832557930700A2B50F /* BowlingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGame.swift; sourceTree = "<group>"; };
 		369C44F82557F9C100E07A7C /* BowlingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameView.swift; sourceTree = "<group>"; };
+		369C4515255806B000E07A7C /* BowlingGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				361DBD562557904400A2B50F /* Preview Content */,
 				361DBD832557930700A2B50F /* BowlingGame.swift */,
 				369C44F82557F9C100E07A7C /* BowlingGameView.swift */,
+				369C4515255806B000E07A7C /* BowlingGameViewModel.swift */,
 			);
 			path = TDDBowling;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				361DBD532557904100A2B50F /* ContentView.swift in Sources */,
+				369C4516255806B000E07A7C /* BowlingGameViewModel.swift in Sources */,
 				361DBD512557904100A2B50F /* TDDBowlingApp.swift in Sources */,
 				361DBD842557930700A2B50F /* BowlingGame.swift in Sources */,
 				369C44F92557F9C100E07A7C /* BowlingGameView.swift in Sources */,

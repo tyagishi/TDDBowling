@@ -8,72 +8,84 @@
 import SwiftUI
 
 struct BowlingGameView: View {
+    @StateObject var viewModel: BowlingGameViewModel = BowlingGameViewModel()
+    
     var body: some View {
         VStack(spacing:0) {
             HStack(spacing: 0) {
                 Group {
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
-                    FrameView()
+                    FrameView(viewModel: viewModel, index: 0)
+                    FrameView(viewModel: viewModel, index: 1)
+                    FrameView(viewModel: viewModel, index: 2)
+                    FrameView(viewModel: viewModel, index: 3)
+                    FrameView(viewModel: viewModel, index: 4)
+                    FrameView(viewModel: viewModel, index: 5)
+                    FrameView(viewModel: viewModel, index: 6)
+                    FrameView(viewModel: viewModel, index: 7)
+                    FrameView(viewModel: viewModel, index: 8)
+                    FrameView(viewModel: viewModel, index: 9)
                 }
-                TotalScoreView()
+                TotalScoreView(viewModel: viewModel)
             }
-            InputView()
+            InputView(viewModel: viewModel)
         }
     }
 }
 
 struct FrameView: View {
+    let viewModel: BowlingGameViewModel
+    let index:Int
     var body: some View {
         VStack(spacing:0) {
-            FrameIndexView()
+            FrameIndexView(index: index)
             HStack(spacing: 0) {
-                FrameBowlView()
-                FrameBowlView()
+                FrameBowlView(viewModel: viewModel, frameIndex: index, bowlIndex: 0)
+                FrameBowlView(viewModel: viewModel, frameIndex: index, bowlIndex: 1)
             }
-            FrameScoreView()
+            FrameScoreView(viewModel: viewModel, frameIndex: index)
         }
     }
 }
 
 struct FrameIndexView: View {
+    let index:Int
     var body: some View {
-        Text("1")
+        Text(String(index+1))
             .frame(width: 50, height: 20)
             .border(Color.gray.opacity(0.5))
     }
 }
 
 struct FrameBowlView: View {
+    let viewModel: BowlingGameViewModel
+    let frameIndex: Int
+    let bowlIndex: Int
+
     var body: some View {
-        Text("3")
+        Text(viewModel.bowlAsText(frame: frameIndex, bowl: bowlIndex))
             .frame(width: 25, height: 20)
             .border(Color.gray.opacity(0.5))
     }
 }
 
 struct FrameScoreView: View {
+    let viewModel: BowlingGameViewModel
+    let frameIndex: Int
     var body: some View {
-        Text("100")
+        Text(viewModel.scoreAsText(frame: frameIndex))
             .frame(width: 50, height: 20)
             .border(Color.gray.opacity(0.5))
     }
 }
 
 struct TotalScoreView: View {
+    let viewModel: BowlingGameViewModel
     var body: some View {
         VStack {
             Text("Total")
                 .frame(width: 50, height: 20)
                 .border(Color.gray.opacity(0.5))
-            Text("154")
+            Text(viewModel.scoreAsText(frame: 9))
                 .frame(width: 50, height: 40)
                 .border(Color.gray.opacity(0.5))
         }
@@ -81,6 +93,7 @@ struct TotalScoreView: View {
 }
 
 struct InputView: View {
+    @ObservedObject var viewModel: BowlingGameViewModel
     var body: some View {
         HStack {
             Button(action: {}, label: { Text("0") } )
