@@ -26,13 +26,29 @@ class BowlingGameTests: XCTestCase {
     func test_putScore_atFrame0Bowl0_shouldBeRecorded() {
         var bowlingGame = BowlingGame()
 
-        let result1 = bowlingGame.addBowlResult(3)
-        XCTAssertTrue(result1)
+        let resultBowl0 = bowlingGame.addBowlResult(3)
+        XCTAssertTrue(resultBowl0)
 
-        let bowl11 = bowlingGame.bowlResult(frame: 0, bowl: 0)
-        XCTAssertEqual(bowl11, 3)
+        let bowl00 = bowlingGame.bowlResult(frame: 0, bowl: 0)
+        XCTAssertEqual(bowl00, 3)
     }
-    
+
+    func test_putScore_atFrame0Bowl0And1_shouldBeRecorded() {
+        var bowlingGame = BowlingGame()
+
+        let resultBowl0 = bowlingGame.addBowlResult(3)
+        XCTAssertTrue(resultBowl0)
+
+        let bowl00 = bowlingGame.bowlResult(frame: 0, bowl: 0)
+        XCTAssertEqual(bowl00, 3)
+
+        let resultBowl1 = bowlingGame.addBowlResult(5)
+        XCTAssertTrue(resultBowl1)
+
+        let bowl01 = bowlingGame.bowlResult(frame: 0, bowl: 1)
+        XCTAssertEqual(bowl01, 5)
+    }
+
 //    func test_putScore_atFrame0Bowl0_shouldBeRecorded() {
 //        let bowlingGame = BowlingGame()
 //
