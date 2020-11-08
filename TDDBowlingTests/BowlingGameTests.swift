@@ -38,24 +38,24 @@ class BowlingGameTests: XCTestCase {
         let bowl01 = bowlingGame.bowlResult(frame: 0, bowl: 1)
         XCTAssertEqual(bowl01, 5)
     }
-
-//    func test_putScore_atFrame0Bowl0_shouldBeRecorded() {
-//        let bowlingGame = BowlingGame()
-//
-//        let result1 = bowlingGame.addBowlResult(3)
-//        XCTAssertTrue(result1)
-//
-////        let result2 = bowlingGame.addBowlResult(2)
-////        XCTAssertTrue(result2)
-//
-//        let bowl11 = bowlingGame.bowlResult(frame: 0, bowl: 0)
-//        XCTAssertEqual(bowl11, 3)
-//
-////        let bowl12 = bowlingGame.bowlResult(frame: 0, bowl: 1)
-////        XCTAssertEqual(bowl11, 2)
-//    }
-//    func test_<#methodName#>_<#withCertainState#>_<#shouldDoSomething#>() {
-//    <#Arrange, Act, Assert#>
-//    }
     
+    func test_recordScore_wholeGameWithOutSpareStrike_shouldBeRecorded() {
+        var bowlingGame = BowlingGame()
+        var gameData:[[Int]] = []
+        
+        for _ in 0..<10 {
+            let bowl1 = Int.random(in: 0..<10)
+            let bowlResult1 = bowlingGame.addBowlResult(bowl1)
+            XCTAssertNotNil(bowlResult1)
+            let bowl2 = Int.random(in: 0..<(9-bowl1))
+            let bowlResult2 = bowlingGame.addBowlResult(bowl2)
+            XCTAssertNotNil(bowlResult2)
+            gameData.append([bowl1, bowl2])
+        }
+        
+        for index in 0..<10 {
+            XCTAssertEqual(bowlingGame.bowlResult(frame: index, bowl: 0), gameData[index][0])
+            XCTAssertEqual(bowlingGame.bowlResult(frame: index, bowl: 1), gameData[index][1])
+        }
+    }
 }

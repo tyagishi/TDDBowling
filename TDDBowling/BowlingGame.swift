@@ -10,11 +10,33 @@ import Foundation
 struct BowlingGame {
     var frames:[Frame] = [Frame](repeating: .init(), count: 10)
     
-    mutating func addBowlResult(_ num: Int) -> Bool {
-        self.frames[0].bowls[0] = .Done(num)
-        return true
+    func findRecordableFrameBowl() -> (frame:Int, bowl:Int)? {
+        for frameIndex in 0..<10 {
+            let frame = frames[frameIndex]
+            for bowlIndex in 0..<3 {
+                let bowl = frame.bowls[bowlIndex]
+                switch bowl {
+                    case .Done(_):
+                        continue
+                    case .NoNeed:
+                        continue
+                    case .NotYet:
+                        return (frameIndex, bowlIndex)
+                }
+            }
+        }
+        return nil
     }
-
+    
+    mutating func addBowlResult(_ num: Int) -> Bool {
+        if let addIndex = self.findRecordableFrameBowl() {
+            self.frames[addIndex.frame].bowls[addIndex.bowl] = .Done(num)
+            return true
+        }
+        return false
+    }
+        
+        
     func bowlResult(frame: Int, bowl: Int)  -> Int? {
         let bowl = frames[frame].bowls[bowl]
         
@@ -26,7 +48,7 @@ struct BowlingGame {
         }
     }
 }
-
+    
 struct Frame {
     var bowls:[Bowl] = [.NotYet, .NotYet, .NoNeed]
 }
