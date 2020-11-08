@@ -13,6 +13,8 @@
 		361DBD582557904400A2B50F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 361DBD572557904400A2B50F /* Preview Assets.xcassets */; };
 		361DBD632557904400A2B50F /* TDDBowlingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD622557904400A2B50F /* TDDBowlingTests.swift */; };
 		361DBD6E2557904400A2B50F /* TDDBowlingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD6D2557904400A2B50F /* TDDBowlingUITests.swift */; };
+		361DBD7F2557920900A2B50F /* BowlingGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD7E2557920900A2B50F /* BowlingGameTests.swift */; };
+		361DBD842557930700A2B50F /* BowlingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD832557930700A2B50F /* BowlingGame.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +47,8 @@
 		361DBD692557904400A2B50F /* TDDBowlingUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TDDBowlingUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		361DBD6D2557904400A2B50F /* TDDBowlingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDDBowlingUITests.swift; sourceTree = "<group>"; };
 		361DBD6F2557904400A2B50F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		361DBD7E2557920900A2B50F /* BowlingGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameTests.swift; sourceTree = "<group>"; };
+		361DBD832557930700A2B50F /* BowlingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGame.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,7 @@
 				361DBD542557904400A2B50F /* Assets.xcassets */,
 				361DBD592557904400A2B50F /* Info.plist */,
 				361DBD562557904400A2B50F /* Preview Content */,
+				361DBD832557930700A2B50F /* BowlingGame.swift */,
 			);
 			path = TDDBowling;
 			sourceTree = "<group>";
@@ -117,6 +122,7 @@
 			children = (
 				361DBD622557904400A2B50F /* TDDBowlingTests.swift */,
 				361DBD642557904400A2B50F /* Info.plist */,
+				361DBD7E2557920900A2B50F /* BowlingGameTests.swift */,
 			);
 			path = TDDBowlingTests;
 			sourceTree = "<group>";
@@ -261,6 +267,7 @@
 			files = (
 				361DBD532557904100A2B50F /* ContentView.swift in Sources */,
 				361DBD512557904100A2B50F /* TDDBowlingApp.swift in Sources */,
+				361DBD842557930700A2B50F /* BowlingGame.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				361DBD7F2557920900A2B50F /* BowlingGameTests.swift in Sources */,
 				361DBD632557904400A2B50F /* TDDBowlingTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
