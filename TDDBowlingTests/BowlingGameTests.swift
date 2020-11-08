@@ -23,16 +23,6 @@ class BowlingGameTests: XCTestCase {
         XCTAssertNotNil(bowlingGame)
     }
     
-    func test_putScore_atFrame0Bowl0_shouldBeRecorded() {
-        var bowlingGame = BowlingGame()
-
-        let resultBowl0 = bowlingGame.addBowlResult(3)
-        XCTAssertTrue(resultBowl0)
-
-        let bowl00 = bowlingGame.bowlResult(frame: 0, bowl: 0)
-        XCTAssertEqual(bowl00, 3)
-    }
-
     func test_putScore_atFrame0Bowl0And1_shouldBeRecorded() {
         var bowlingGame = BowlingGame()
 
