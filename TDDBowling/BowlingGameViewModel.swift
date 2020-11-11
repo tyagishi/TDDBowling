@@ -16,10 +16,18 @@ class BowlingGameViewModel : ObservableObject{
     }
     
     func bowlAsText(frame:Int, bowl: Int) -> String {
-        if let num = game.bowlResult(frame: frame, bowl: bowl) {
-            return String(num)
+        switch game.frameState(frame: frame) {
+            case .Strike:
+                return bowl == 0 ? "X" : ""
+            case .Spare:
+                if bowl == 1 { return "/" }
+                fallthrough
+            case .Others:
+                if let num = game.bowlResult(frame: frame, bowl: bowl)  {
+                    return String(num)
+                }
+                return "-"
         }
-        return "-"
     }
 
     func scoreAsText(frame:Int) -> String {

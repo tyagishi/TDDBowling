@@ -46,19 +46,7 @@ class TDDBowlingUITests: XCTestCase {
     }
 
     func test_RecordOneFrame_TwoBowl_ShouldBeRecordedAndAtFirstFrame() throws {
-        XCTAssertEqual(frameBowlLabels[0][0].label, "-")
-        XCTAssertEqual(frameBowlLabels[0][1].label, "-")
-        XCTAssertEqual(frameScoreLabels[0].label,     "-")
-
-        bowlButtons[1].tap()
-        XCTAssertEqual(frameBowlLabels[0][0].label, "1")
-        XCTAssertEqual(frameBowlLabels[0][1].label, "-")
-        XCTAssertEqual(frameScoreLabels[0].label,     "-")
-
-        bowlButtons[5].tap()
-        XCTAssertEqual(frameBowlLabels[0][0].label, "1")
-        XCTAssertEqual(frameBowlLabels[0][1].label, "5")
-        XCTAssertEqual(frameScoreLabels[0].label,     "6")
+        checkAndThrowFrame(prevResult: 0, frameIndex: 0, num1: 1, num2: 5)
     }
     
     func test_ScoreAtEachFrame_From0To9FrameNoSpareNoStrike_CorrectlyDisplayed() {
@@ -94,4 +82,20 @@ class TDDBowlingUITests: XCTestCase {
         let bowl1 = Int.random(in: 0..<(10-bowl0))
         return (bowl0, bowl1)
     }
+    
+    func test_ScoreAtFirst2Frames_From0To1WithSpareAtFirstFrame_CorrectlyDisplayed() {
+        bowlButtons[5].tap()
+        bowlButtons[5].tap()
+        XCTAssertEqual(frameBowlLabels[0][0].label, "5")
+        XCTAssertEqual(frameBowlLabels[0][1].label, "/")
+        XCTAssertEqual(frameScoreLabels[0].label, "-") // still un-calculatable
+        
+        bowlButtons[6].tap()
+        XCTAssertEqual(frameScoreLabels[0].label, "16") // now can calculate frameScoreLabels[0]
+        
+        bowlButtons[2].tap()
+        XCTAssertEqual(frameScoreLabels[1].label, "24")
+    }
+    
+
 }

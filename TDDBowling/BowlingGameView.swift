@@ -92,7 +92,7 @@ struct InputView: View {
     @ObservedObject var viewModel: BowlingGameViewModel
     var body: some View {
         HStack {
-            ForEach(0..<10) { index in
+            ForEach(0..<11) { index in
                 Button(action: {
                     viewModel.addBowlResult(num: index)
                 }, label: { Text(String(index)) } )
