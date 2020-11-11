@@ -67,6 +67,7 @@ struct FrameScoreView: View {
     let frameIndex: Int
     var body: some View {
         Text(viewModel.scoreAsText(frame: frameIndex))
+            .accessibility(identifier: "FrameScoreView\(frameIndex)")
             .frame(width: 50, height: 20)
             .border(Color.gray.opacity(0.5))
     }
@@ -80,6 +81,7 @@ struct TotalScoreView: View {
                 .frame(width: 50, height: 20)
                 .border(Color.gray.opacity(0.5))
             Text(viewModel.scoreAsText(frame: 9))
+                .accessibility(identifier: "TotalScoreView")
                 .frame(width: 50, height: 40)
                 .border(Color.gray.opacity(0.5))
         }

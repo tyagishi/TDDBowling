@@ -47,6 +47,26 @@ struct BowlingGame {
                 return nil
         }
     }
+    
+    func frameResult(frame: Int) -> Int? {
+        if ( frame == 0 ) {
+            if let bowl0 = bowlResult(frame: 0, bowl: 0) {
+                if let bowl1 = bowlResult(frame: 0, bowl: 1) {
+                    return bowl0 + bowl1
+                }
+            }
+            return nil
+        }
+        
+        if let lastResult = frameResult(frame: frame - 1) {
+            if let bowl0 = bowlResult(frame: frame, bowl: 0) {
+                if let bowl1 = bowlResult(frame: frame, bowl: 1) {
+                    return lastResult + bowl0 + bowl1
+                }
+            }
+        }
+        return nil
+    }
 }
     
 struct Frame {
