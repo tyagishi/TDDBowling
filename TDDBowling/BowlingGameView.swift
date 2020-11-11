@@ -55,7 +55,7 @@ struct FrameBowlView: View {
     let bowlIndex: Int
 
     var body: some View {
-        Text(viewModel.bowlAsText(frame: frameIndex, bowl: bowlIndex))
+        Text(viewModel.bowlAsText(frameIndex: frameIndex, bowlIndex: bowlIndex))
             .accessibility(identifier: String("FrameBowlView\(frameIndex)-\(bowlIndex)"))
             .frame(width: 25, height: 20)
             .border(Color.gray.opacity(0.5))
@@ -66,7 +66,7 @@ struct FrameScoreView: View {
     @ObservedObject var viewModel: BowlingGameViewModel
     let frameIndex: Int
     var body: some View {
-        Text(viewModel.scoreAsText(frame: frameIndex))
+        Text(viewModel.scoreAsText(frameIndex: frameIndex))
             .accessibility(identifier: "FrameScoreView\(frameIndex)")
             .frame(width: 50, height: 20)
             .border(Color.gray.opacity(0.5))
@@ -80,7 +80,7 @@ struct TotalScoreView: View {
             Text("Total")
                 .frame(width: 50, height: 20)
                 .border(Color.gray.opacity(0.5))
-            Text(viewModel.scoreAsText(frame: 9))
+            Text(viewModel.scoreAsText(frameIndex: 9))
                 .accessibility(identifier: "TotalScoreView")
                 .frame(width: 50, height: 40)
                 .border(Color.gray.opacity(0.5))

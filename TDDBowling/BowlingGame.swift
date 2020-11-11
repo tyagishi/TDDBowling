@@ -10,7 +10,7 @@ import Foundation
 struct BowlingGame {
     var frames:[Frame] = [Frame](repeating: .init(), count: 10)
     
-    func findRecordableFrameBowl() -> (frame:Int, bowl:Int)? {
+    func findRecordableFrameBowl() -> (frameIndex:Int, bowlIndex:Int)? {
         for frameIndex in 0..<10 {
             let frame = frames[frameIndex]
             for bowlIndex in 0..<3 {
@@ -30,26 +30,26 @@ struct BowlingGame {
     
     mutating func addBowlResult(_ num: Int) -> Bool {
         if let addIndex = self.findRecordableFrameBowl() {
-            self.frames[addIndex.frame].bowls[addIndex.bowl] = .Done(num)
+            self.frames[addIndex.frameIndex].bowls[addIndex.bowlIndex] = .Done(num)
             // case Strike
-            if (num == 10) && (addIndex.bowl == 0) { // Strike !
-                self.frames[addIndex.frame].bowls[1] = .NoNeed
+            if (num == 10) && (addIndex.bowlIndex == 0) { // Strike !
+                self.frames[addIndex.frameIndex].bowls[1] = .NoNeed
             }
             return true
         }
         return false
     }
         
-    func frameState(frame:Int) -> FrameState {
-        guard let bowl1 = bowlResult(frame: frame, bowl: 0)  else { return .Others }
+    func frameState(frameIndex:Int) -> FrameState {
+        guard let bowl1 = bowlResult(frameIndex: frameIndex, bowlIndex: 0)  else { return .Others }
         if bowl1 == 10 { return .Strike }
-        guard let bowl2 = bowlResult(frame: frame, bowl: 1) else { return .Others }
+        guard let bowl2 = bowlResult(frameIndex: frameIndex, bowlIndex: 1) else { return .Others }
         if bowl1 + bowl2 == 10 { return .Spare }
         return .Others
     }
         
-    func bowlResult(frame: Int, bowl: Int)  -> Int? {
-        let bowl = frames[frame].bowls[bowl]
+    func bowlResult(frameIndex: Int, bowlIndex: Int)  -> Int? {
+        let bowl = frames[frameIndex].bowls[bowlIndex]
         
         switch bowl {
             case .Done(let num):
@@ -59,33 +59,33 @@ struct BowlingGame {
         }
     }
     
-    func frameResult(frame: Int) -> Int? {
-        if let lastResult = frame == 0 ? 0 : frameResult(frame: frame - 1) {
-            switch frameState(frame: frame) {
+    func frameScore(frameIndex: Int) -> Int? {
+        if let lastResult = frameIndex == 0 ? 0 : frameScore(frameIndex: frameIndex - 1) {
+            switch frameState(frameIndex: frameIndex) {
                 case .Spare:
-                    if let nextBowl = bowlResult(frame: frame+1, bowl: 0) {
+                    if let nextBowl = bowlResult(frameIndex: frameIndex+1, bowlIndex: 0) {
                         return lastResult + 10 + nextBowl
                     }
                     return nil // need further info
                 case .Strike:
-                    if let nextBowl = bowlResult(frame: frame+1, bowl: 0) {
-                        switch frameState(frame: frame+1) {
+                    if let nextBowl = bowlResult(frameIndex: frameIndex+1, bowlIndex: 0) {
+                        switch frameState(frameIndex: frameIndex+1) {
                             case .Strike:
-                                if let nextNextBowl = bowlResult(frame: frame+2, bowl: 0) {
+                                if let nextNextBowl = bowlResult(frameIndex: frameIndex+2, bowlIndex: 0) {
                                     return lastResult + 10 + 10 + nextNextBowl
                                 }
                             case .Spare:
                                 return lastResult + 10 + 10
                             case .Others:
-                                if let nextNextBowl = bowlResult(frame: frame+1, bowl: 1) {
-                                    return lastResult + nextBowl + nextNextBowl
+                                if let nextNextBowl = bowlResult(frameIndex: frameIndex+1, bowlIndex: 1) {
+                                    return lastResult + 10 + nextBowl + nextNextBowl
                                 }
                         }
                     }
                     return nil // need further info
                 case .Others:
-                    if let bowl0 = bowlResult(frame: frame, bowl: 0) {
-                        if let bowl1 = bowlResult(frame: frame, bowl: 1) {
+                    if let bowl0 = bowlResult(frameIndex: frameIndex, bowlIndex: 0) {
+                        if let bowl1 = bowlResult(frameIndex: frameIndex, bowlIndex: 1) {
                             return lastResult + bowl0 + bowl1
                         }
                     }

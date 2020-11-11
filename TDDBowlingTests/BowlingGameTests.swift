@@ -29,13 +29,13 @@ class BowlingGameTests: XCTestCase {
         let resultBowl0 = bowlingGame.addBowlResult(3)
         XCTAssertTrue(resultBowl0)
 
-        let bowl00 = bowlingGame.bowlResult(frame: 0, bowl: 0)
+        let bowl00 = bowlingGame.bowlResult(frameIndex: 0, bowlIndex: 0)
         XCTAssertEqual(bowl00, 3)
 
         let resultBowl1 = bowlingGame.addBowlResult(5)
         XCTAssertTrue(resultBowl1)
 
-        let bowl01 = bowlingGame.bowlResult(frame: 0, bowl: 1)
+        let bowl01 = bowlingGame.bowlResult(frameIndex: 0, bowlIndex: 1)
         XCTAssertEqual(bowl01, 5)
     }
     
@@ -47,15 +47,15 @@ class BowlingGameTests: XCTestCase {
             let bowl1 = Int.random(in: 0..<10)
             let bowlResult1 = bowlingGame.addBowlResult(bowl1)
             XCTAssertNotNil(bowlResult1)
-            let bowl2 = Int.random(in: 0..<(9-bowl1))
+            let bowl2 = Int.random(in: 0..<(10-bowl1))
             let bowlResult2 = bowlingGame.addBowlResult(bowl2)
             XCTAssertNotNil(bowlResult2)
             gameData.append([bowl1, bowl2])
         }
         
         for index in 0..<10 {
-            XCTAssertEqual(bowlingGame.bowlResult(frame: index, bowl: 0), gameData[index][0])
-            XCTAssertEqual(bowlingGame.bowlResult(frame: index, bowl: 1), gameData[index][1])
+            XCTAssertEqual(bowlingGame.bowlResult(frameIndex: index, bowlIndex: 0), gameData[index][0])
+            XCTAssertEqual(bowlingGame.bowlResult(frameIndex: index, bowlIndex: 1), gameData[index][1])
         }
     }
 }

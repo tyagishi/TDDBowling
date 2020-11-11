@@ -15,23 +15,23 @@ class BowlingGameViewModel : ObservableObject{
         game = BowlingGame()
     }
     
-    func bowlAsText(frame:Int, bowl: Int) -> String {
-        switch game.frameState(frame: frame) {
+    func bowlAsText(frameIndex:Int, bowlIndex: Int) -> String {
+        switch game.frameState(frameIndex: frameIndex) {
             case .Strike:
-                return bowl == 0 ? "X" : ""
+                return bowlIndex == 0 ? "X" : ""
             case .Spare:
-                if bowl == 1 { return "/" }
+                if bowlIndex == 1 { return "/" }
                 fallthrough
             case .Others:
-                if let num = game.bowlResult(frame: frame, bowl: bowl)  {
+                if let num = game.bowlResult(frameIndex: frameIndex, bowlIndex: bowlIndex)  {
                     return String(num)
                 }
                 return "-"
         }
     }
 
-    func scoreAsText(frame:Int) -> String {
-        if let result = game.frameResult(frame: frame)  {
+    func scoreAsText(frameIndex:Int) -> String {
+        if let result = game.frameScore(frameIndex: frameIndex)  {
             return String(result)
         }
         return "-"
