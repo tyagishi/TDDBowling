@@ -61,10 +61,19 @@ struct BowlingGame {
     
     func frameResult(frame: Int) -> Int? {
         if let lastResult = frame == 0 ? 0 : frameResult(frame: frame - 1) {
-            if let bowl0 = bowlResult(frame: frame, bowl: 0) {
-                if let bowl1 = bowlResult(frame: frame, bowl: 1) {
-                    return lastResult + bowl0 + bowl1
-                }
+            switch frameState(frame: frame) {
+                case .Spare:
+                    if let nextBowl = bowlResult(frame: frame+1, bowl: 0) {
+                        return lastResult + 10 + nextBowl
+                    }
+                    return nil // need further info
+                case .Strike: fallthrough
+                case .Others:
+                    if let bowl0 = bowlResult(frame: frame, bowl: 0) {
+                        if let bowl1 = bowlResult(frame: frame, bowl: 1) {
+                            return lastResult + bowl0 + bowl1
+                        }
+                    }
             }
         }
         return nil
