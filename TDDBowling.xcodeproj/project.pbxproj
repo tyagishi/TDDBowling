@@ -108,9 +108,9 @@
 				361DBD542557904400A2B50F /* Assets.xcassets */,
 				361DBD592557904400A2B50F /* Info.plist */,
 				361DBD562557904400A2B50F /* Preview Content */,
-				361DBD832557930700A2B50F /* BowlingGame.swift */,
 				369C44F82557F9C100E07A7C /* BowlingGameView.swift */,
 				369C4515255806B000E07A7C /* BowlingGameViewModel.swift */,
+				361DBD832557930700A2B50F /* BowlingGame.swift */,
 			);
 			path = TDDBowling;
 			sourceTree = "<group>";

@@ -14,16 +14,9 @@ struct BowlingGameView: View {
         VStack(spacing:0) {
             HStack(spacing: 0) {
                 Group {
-                    FrameView(viewModel: viewModel, index: 0)
-                    FrameView(viewModel: viewModel, index: 1)
-                    FrameView(viewModel: viewModel, index: 2)
-                    FrameView(viewModel: viewModel, index: 3)
-                    FrameView(viewModel: viewModel, index: 4)
-                    FrameView(viewModel: viewModel, index: 5)
-                    FrameView(viewModel: viewModel, index: 6)
-                    FrameView(viewModel: viewModel, index: 7)
-                    FrameView(viewModel: viewModel, index: 8)
-                    FrameView(viewModel: viewModel, index: 9)
+                    ForEach (0..<10) { index in
+                        FrameView(viewModel: viewModel, index: index)
+                    }
                 }
                 TotalScoreView(viewModel: viewModel)
             }
@@ -33,7 +26,7 @@ struct BowlingGameView: View {
 }
 
 struct FrameView: View {
-    let viewModel: BowlingGameViewModel
+    @ObservedObject var viewModel: BowlingGameViewModel
     let index:Int
     var body: some View {
         VStack(spacing:0) {
@@ -57,19 +50,20 @@ struct FrameIndexView: View {
 }
 
 struct FrameBowlView: View {
-    let viewModel: BowlingGameViewModel
+    @ObservedObject var viewModel: BowlingGameViewModel
     let frameIndex: Int
     let bowlIndex: Int
 
     var body: some View {
         Text(viewModel.bowlAsText(frame: frameIndex, bowl: bowlIndex))
+            .accessibility(identifier: String("FrameBowlView\(frameIndex)-\(bowlIndex)"))
             .frame(width: 25, height: 20)
             .border(Color.gray.opacity(0.5))
     }
 }
 
 struct FrameScoreView: View {
-    let viewModel: BowlingGameViewModel
+    @ObservedObject var viewModel: BowlingGameViewModel
     let frameIndex: Int
     var body: some View {
         Text(viewModel.scoreAsText(frame: frameIndex))
@@ -79,7 +73,7 @@ struct FrameScoreView: View {
 }
 
 struct TotalScoreView: View {
-    let viewModel: BowlingGameViewModel
+    @ObservedObject var viewModel: BowlingGameViewModel
     var body: some View {
         VStack {
             Text("Total")
@@ -96,16 +90,12 @@ struct InputView: View {
     @ObservedObject var viewModel: BowlingGameViewModel
     var body: some View {
         HStack {
-            Button(action: {}, label: { Text("0") } )
-            Button(action: {}, label: { Text("1") } )
-            Button(action: {}, label: { Text("2") } )
-            Button(action: {}, label: { Text("3") } )
-            Button(action: {}, label: { Text("4") } )
-            Button(action: {}, label: { Text("5") } )
-            Button(action: {}, label: { Text("6") } )
-            Button(action: {}, label: { Text("7") } )
-            Button(action: {}, label: { Text("8") } )
-            Button(action: {}, label: { Text("9") } )
+            ForEach(0..<10) { index in
+                Button(action: {
+                    viewModel.addBowlResult(num: index)
+                }, label: { Text(String(index)) } )
+                    .accessibility(identifier: String("Button\(index)"))
+            }
         }
         .font(.largeTitle)
     }

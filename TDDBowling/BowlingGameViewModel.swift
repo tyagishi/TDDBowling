@@ -25,5 +25,9 @@ class BowlingGameViewModel : ObservableObject{
     func scoreAsText(frame:Int) -> String {
         return "0"
     }
+    
+    func addBowlResult(num: Int) {
+        _ = game.addBowlResult(num)
+    }
 }
 
