@@ -67,7 +67,22 @@ struct BowlingGame {
                         return lastResult + 10 + nextBowl
                     }
                     return nil // need further info
-                case .Strike: fallthrough
+                case .Strike:
+                    if let nextBowl = bowlResult(frame: frame+1, bowl: 0) {
+                        switch frameState(frame: frame+1) {
+                            case .Strike:
+                                if let nextNextBowl = bowlResult(frame: frame+2, bowl: 0) {
+                                    return lastResult + 10 + 10 + nextNextBowl
+                                }
+                            case .Spare:
+                                return lastResult + 10 + 10
+                            case .Others:
+                                if let nextNextBowl = bowlResult(frame: frame+1, bowl: 1) {
+                                    return lastResult + nextBowl + nextNextBowl
+                                }
+                        }
+                    }
+                    return nil // need further info
                 case .Others:
                     if let bowl0 = bowlResult(frame: frame, bowl: 0) {
                         if let bowl1 = bowlResult(frame: frame, bowl: 1) {

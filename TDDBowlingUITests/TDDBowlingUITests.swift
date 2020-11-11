@@ -29,6 +29,8 @@ class TDDBowlingUITests: XCTestCase {
             let score = app.staticTexts["FrameScoreView\(index)"]
             frameScoreLabels.append(score)
         }
+        let button10 = app.buttons["Button10"]
+        bowlButtons.append(button10)
         totalScoreLabel = app.staticTexts["TotalScoreView"]
     }
 
@@ -97,5 +99,48 @@ class TDDBowlingUITests: XCTestCase {
         XCTAssertEqual(frameScoreLabels[1].label, "24")
     }
     
+    func test_ScoreAtFirst4Frames_From0To3WithStrikeStrikeSpareNormal_CorrectlyDisplayed() {
+        // Frame : 1 (Strike)
+        bowlButtons[10].tap()
+        XCTAssertEqual(frameBowlLabels[0][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[0][1].label, "")
+        XCTAssertEqual(frameScoreLabels[0].label, "-") // still un-calculatable
 
+        // Frame : 2 (Strike)
+        bowlButtons[10].tap()
+        XCTAssertEqual(frameBowlLabels[1][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[1][1].label, "")
+        XCTAssertEqual(frameScoreLabels[1].label, "-") // still un-calculatable
+
+        // Frame : 3 (Spare)
+        bowlButtons[6].tap()
+        XCTAssertEqual(frameBowlLabels[2][0].label, "6")
+        XCTAssertEqual(frameBowlLabels[2][1].label, "-")
+        XCTAssertEqual(frameScoreLabels[2].label, "-") // still un-calculatable
+
+        // Frame1 score now calculatable
+        XCTAssertEqual(frameScoreLabels[0].label, "26")
+
+        bowlButtons[4].tap()
+        XCTAssertEqual(frameBowlLabels[2][0].label, "6")
+        XCTAssertEqual(frameBowlLabels[2][1].label, "/")
+        XCTAssertEqual(frameScoreLabels[2].label, "-") // still un-calculatable
+
+        // Frame2 score now calculatable
+        XCTAssertEqual(frameScoreLabels[1].label, "46") // still un-calculatable
+
+        // Frame : 4 (Normal)
+        bowlButtons[3].tap()
+        XCTAssertEqual(frameBowlLabels[3][0].label, "3")
+        XCTAssertEqual(frameBowlLabels[3][1].label, "-")
+        XCTAssertEqual(frameScoreLabels[3].label, "-") // still un-calculatable
+
+        // Frame3 score now calculatable
+        XCTAssertEqual(frameScoreLabels[2].label, "59") // still un-calculatable
+
+        bowlButtons[2].tap()
+        XCTAssertEqual(frameBowlLabels[3][0].label, "3")
+        XCTAssertEqual(frameBowlLabels[3][1].label, "2")
+        XCTAssertEqual(frameScoreLabels[3].label, "64") // still un-calculatable
+    }
 }
