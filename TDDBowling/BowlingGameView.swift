@@ -34,6 +34,9 @@ struct FrameView: View {
             HStack(spacing: 0) {
                 FrameBowlView(viewModel: viewModel, frameIndex: index, bowlIndex: 0)
                 FrameBowlView(viewModel: viewModel, frameIndex: index, bowlIndex: 1)
+                if (index == 9) {
+                    FrameBowlView(viewModel: viewModel, frameIndex: index, bowlIndex: 2)
+                }
             }
             FrameScoreView(viewModel: viewModel, frameIndex: index)
         }
@@ -44,7 +47,7 @@ struct FrameIndexView: View {
     let index:Int
     var body: some View {
         Text(String(index+1))
-            .frame(width: 50, height: 20)
+            .frame(width: index == 9 ? 75 : 50, height: 20)
             .border(Color.gray.opacity(0.5))
     }
 }
@@ -68,7 +71,7 @@ struct FrameScoreView: View {
     var body: some View {
         Text(viewModel.scoreAsText(frameIndex: frameIndex))
             .accessibility(identifier: "FrameScoreView\(frameIndex)")
-            .frame(width: 50, height: 20)
+            .frame(width: frameIndex == 9 ? 75 : 50, height: 20)
             .border(Color.gray.opacity(0.5))
     }
 }

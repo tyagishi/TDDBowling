@@ -58,4 +58,83 @@ class BowlingGameTests: XCTestCase {
             XCTAssertEqual(bowlingGame.bowlResult(frameIndex: index, bowlIndex: 1), gameData[index][1])
         }
     }
+    
+    func test_recordScore_12Strikes_shouldBeRecorded() {
+        var bowlingGame = BowlingGame()
+
+        for index in 0..<9 {
+            XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record \(index+1)-th strike ")
+        }
+
+        XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record 10-th strike ")
+
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 8))
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+
+        XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record 11-th strike ")
+
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 8), 270)
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+
+        XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record 12-th strike ")
+
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 9), 300)
+    }
+
+    func test_recordScore_11StrikesPlus1_shouldBeRecorded() {
+        var bowlingGame = BowlingGame()
+
+        for index in 0..<11 {
+            XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record \(index+1)-th strike ")
+        }
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 8), 270)
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+
+        XCTAssertTrue(bowlingGame.addBowlResult(3), "failed to record 3rd throw in 10th frame")
+
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 9), 293)
+    }
+
+    func test_recordScore_10StrikesPlus2_shouldBeRecorded() {
+        var bowlingGame = BowlingGame()
+
+        for index in 0..<10 {
+            XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record \(index+1)-th strike ")
+        }
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 8))
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+
+        XCTAssertTrue(bowlingGame.addBowlResult(3), "failed to record 2nd throw in 10th frame")
+
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 8), 263)
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+        
+        XCTAssertTrue(bowlingGame.addBowlResult(3), "failed to record 3rd throw in 10th frame")
+
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 9), 279)
+    }
+
+    func test_recordScore_9StrikesPlusSparePlus1_shouldBeRecorded() {
+        var bowlingGame = BowlingGame()
+
+        for index in 0..<9 {
+            XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record \(index+1)-th strike ")
+        }
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 8))
+
+        XCTAssertTrue(bowlingGame.addBowlResult(4), "failed to record 1st throw in 10th frame")
+        
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 8))
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+        
+        XCTAssertTrue(bowlingGame.addBowlResult(6), "failed to record 2nd throw in 10th frame")
+        
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 8), 254)
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
+        
+        XCTAssertTrue(bowlingGame.addBowlResult(5), "failed to record 3rd throw in 10th frame")
+        
+        XCTAssertEqual(bowlingGame.frameScore(frameIndex: 9), 269)
+    }
+
 }
