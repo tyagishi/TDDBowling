@@ -79,5 +79,12 @@ class BowlingGameViewModel : ObservableObject{
     func addBowlResult(num: Int) {
         _ = game.addBowlResult(num)
     }
+    
+    func isButtonAvailable(index: Int) -> Bool {
+        if let availableRange = game.availableRangeForNextThrow() {
+            return availableRange.contains(index)
+        }
+        return false
+    }
 }
 

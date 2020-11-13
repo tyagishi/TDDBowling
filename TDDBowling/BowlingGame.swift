@@ -155,6 +155,37 @@ struct BowlingGame {
         }
         return nil // need further info
     }
+    
+    func availableRangeForNextThrow() -> Range<Int>? {
+        if let index = findRecordableFrameBowl() {
+            if index.frameIndex != 9 {
+                if index.bowlIndex == 0 {
+                    return Range(0...10)
+                }
+                if let prevBowl = bowlResult(frameIndex: index.frameIndex, bowlIndex: 0) {
+                    return Range(0...(10-prevBowl))
+                }
+            } else {
+                let bowl0 = bowlResult(frameIndex: 9, bowlIndex: 0)
+                let bowl1 = bowlResult(frameIndex: 9, bowlIndex: 1)
+                switch index.bowlIndex {
+                    case 0:
+                        return Range(0...10)
+                    case 1:
+                        if bowl0 == 10 { return Range(0...10)}
+                        return Range(0...(10-bowl0!))
+                    case 2:
+                        if (bowl0! == 10)&&(bowl1! == 10) { return Range(0...10)}
+                        if (bowl0! == 10)&&(bowl1! < 10) { return Range(0...(10-bowl1!))}
+                        if (bowl0! + bowl1! == 10) { return Range(0...10) }
+                    default:
+//                        fatalError()
+                        break
+                }
+            }
+        }
+        return nil
+    }
 }
    
 struct Frame {
