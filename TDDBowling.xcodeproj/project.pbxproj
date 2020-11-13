@@ -17,6 +17,7 @@
 		361DBD842557930700A2B50F /* BowlingGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 361DBD832557930700A2B50F /* BowlingGame.swift */; };
 		369C44F92557F9C100E07A7C /* BowlingGameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369C44F82557F9C100E07A7C /* BowlingGameView.swift */; };
 		369C4516255806B000E07A7C /* BowlingGameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 369C4515255806B000E07A7C /* BowlingGameViewModel.swift */; };
+		36E47B3B255E27D60026AA0A /* TDDBowlingUITestAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36E47B3A255E27D60026AA0A /* TDDBowlingUITestAvailability.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		361DBD832557930700A2B50F /* BowlingGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGame.swift; sourceTree = "<group>"; };
 		369C44F82557F9C100E07A7C /* BowlingGameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameView.swift; sourceTree = "<group>"; };
 		369C4515255806B000E07A7C /* BowlingGameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BowlingGameViewModel.swift; sourceTree = "<group>"; };
+		36E47B3A255E27D60026AA0A /* TDDBowlingUITestAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TDDBowlingUITestAvailability.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 			children = (
 				361DBD6D2557904400A2B50F /* TDDBowlingUITests.swift */,
 				361DBD6F2557904400A2B50F /* Info.plist */,
+				36E47B3A255E27D60026AA0A /* TDDBowlingUITestAvailability.swift */,
 			);
 			path = TDDBowlingUITests;
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				36E47B3B255E27D60026AA0A /* TDDBowlingUITestAvailability.swift in Sources */,
 				361DBD6E2557904400A2B50F /* TDDBowlingUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -68,7 +68,7 @@ class BowlingGameTests: XCTestCase {
 
         XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record 10-th strike ")
 
-        XCTAssertNil(bowlingGame.frameScore(frameIndex: 8))
+        XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
         XCTAssertNil(bowlingGame.frameScore(frameIndex: 9))
 
         XCTAssertTrue(bowlingGame.addBowlResult(10), "failed to record 11-th strike ")

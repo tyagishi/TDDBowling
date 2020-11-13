@@ -29,8 +29,13 @@ class TDDBowlingUITests: XCTestCase {
             let score = app.staticTexts["FrameScoreView\(index)"]
             frameScoreLabels.append(score)
         }
+
         let button10 = app.buttons["Button10"]
         bowlButtons.append(button10)
+
+        let bowlf10b3 = app.staticTexts["FrameBowlView9-2"]
+        frameBowlLabels[9].append(bowlf10b3)
+        
         totalScoreLabel = app.staticTexts["TotalScoreView"]
     }
 
@@ -44,10 +49,11 @@ class TDDBowlingUITests: XCTestCase {
             XCTAssertTrue(frameBowlLabels[index][1].exists)
             XCTAssertTrue(frameScoreLabels[index].exists)
         }
+        XCTAssertTrue(frameBowlLabels[9][2].exists)
         XCTAssertTrue(totalScoreLabel.exists)
     }
 
-    func test_RecordOneFrame_TwoBowl_ShouldBeRecordedAndAtFirstFrame() throws {
+    func test_RecordOneFrame_TwoBowl_displayedCorrectlyAndAtFirstFrame() throws {
         checkAndThrowFrame(prevResult: 0, frameIndex: 0, num1: 1, num2: 5)
     }
     
@@ -142,5 +148,103 @@ class TDDBowlingUITests: XCTestCase {
         XCTAssertEqual(frameBowlLabels[3][0].label, "3")
         XCTAssertEqual(frameBowlLabels[3][1].label, "2")
         XCTAssertEqual(frameScoreLabels[3].label, "64") // still un-calculatable
+    }
+
+    func test_recordScore_12Strikes_displayedCorrectly() {
+        for _ in 0..<9 {
+            bowlButtons[10].tap()
+        }
+        bowlButtons[10].tap()
+        XCTAssertEqual(frameScoreLabels[8].label, "-")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[10].tap()
+        XCTAssertEqual(frameScoreLabels[8].label, "270")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[10].tap()
+        XCTAssertEqual(frameScoreLabels[9].label, "300")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "X")
+    }
+
+    func test_recordScore_11StrikesPlus1_displayedCorrectly() {
+        for _ in 0..<11 {
+            bowlButtons[10].tap()
+        }
+        XCTAssertEqual(frameScoreLabels[8].label, "270")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[3].tap()
+        XCTAssertEqual(frameScoreLabels[9].label, "293")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "3")
+
+    }
+
+    func test_recordScore_10StrikesPlus2_displayedCorrectly() {
+        for _ in 0..<10 {
+            bowlButtons[10].tap()
+        }
+        XCTAssertEqual(frameScoreLabels[8].label, "-")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[3].tap()
+        XCTAssertEqual(frameScoreLabels[8].label, "263")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "3")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[3].tap()
+        XCTAssertEqual(frameScoreLabels[9].label, "279")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "X")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "3")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "3")
+    }
+
+    func test_recordScore_9StrikesPlusSparePlus1_displayedCorrectly() {
+        for _ in 0..<9 {
+            bowlButtons[10].tap()
+        }
+        XCTAssertEqual(frameScoreLabels[8].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[4].tap()
+        XCTAssertEqual(frameScoreLabels[8].label, "-")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "4")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[6].tap()
+        XCTAssertEqual(frameScoreLabels[8].label, "254")
+        XCTAssertEqual(frameScoreLabels[9].label, "-")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "4")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "/")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "-")
+
+        bowlButtons[5].tap()
+        XCTAssertEqual(frameScoreLabels[8].label, "254")
+        XCTAssertEqual(frameScoreLabels[9].label, "269")
+        XCTAssertEqual(frameBowlLabels[9][0].label, "4")
+        XCTAssertEqual(frameBowlLabels[9][1].label, "/")
+        XCTAssertEqual(frameBowlLabels[9][2].label, "5")
     }
 }
