@@ -99,7 +99,8 @@ struct InputView: View {
                 Button(action: {
                     viewModel.addBowlResult(num: index)
                 }, label: { Text(String(index)) } )
-                    .accessibility(identifier: String("Button\(index)"))
+                .frame(width: 45, height:45)
+                .accessibility(identifier: String("Button\(index)"))
                 .disabled(!viewModel.isButtonAvailable(index: index))
             }
         }
@@ -113,4 +114,3 @@ struct BowlingGameView_Previews: PreviewProvider {
             .previewLayout(.fixed(width: 1792/2, height: 828/2))
     }
 }
-
